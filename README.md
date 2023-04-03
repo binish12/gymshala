@@ -1,6 +1,6 @@
 # Gymshala
 
-A complete gym app to gymers.(Manage membership,Calorie Calculator,Food Calorie and Macros Tracker,Gym announcements,Workout Helper with all types of workout splits)
+A complete gym app to gym goers.(Manage membership,Calorie Calculator,Food Calorie and Macros Tracker,Gym announcements,Workout Helper with all types of workout splits)
 
 ## Getting Started
 
