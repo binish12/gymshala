@@ -5,7 +5,6 @@ import 'package:gymshala/pages/notification_page.dart';
 class NotificationBellButton extends StatelessWidget {
   final RxInt notificationCount;
 
-
   const NotificationBellButton({super.key, required this.notificationCount});
 
   @override
@@ -13,11 +12,10 @@ class NotificationBellButton extends StatelessWidget {
     return Stack(
       children: [
         IconButton(
-          icon: const Icon(Icons.notifications),
+          icon: const Icon(Icons.notifications,color: Colors.white,),
           onPressed: () {
             notificationCount.value = 0;
-            Get.to(()=>  NotificationPage());
-            
+            Get.to(() => NotificationPage());
 
             // Handle notification button press
           },
@@ -27,24 +25,24 @@ class NotificationBellButton extends StatelessWidget {
             right: 6,
             top: 4,
             child: Container(
-              padding: const EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              constraints: const BoxConstraints(
-                minWidth: 16,
-                minHeight: 16,
-              ),
-              child: Text(
-                '$notificationCount',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  constraints: const BoxConstraints(
+                    minWidth: 16,
+                    minHeight: 16,
+                  ),
+                  child:  Text(
+                    '$notificationCount',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                )
           ),
       ],
     );

@@ -6,5 +6,11 @@ void main() {
   runApp( GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: HomePage(),
+    theme: ThemeData(
+      appBarTheme: AppBarTheme(
+        color: Color(0xFFC1121F)
+      )
+    ),
   ));
 }
+

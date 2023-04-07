@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:gymshala/controllers/workout_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../widgets/bottom_navbar.dart';
+
 
 
 
@@ -56,13 +58,8 @@ class WorkoutPage extends StatelessWidget {
 
           ),
         ),
+        bottomNavigationBar: AppBottomNavigationBar(selectedIndex: 2),
 
-      
-
-        
-        
-        
-        
         ),
 
     );

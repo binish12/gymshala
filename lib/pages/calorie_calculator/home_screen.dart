@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gymshala/controllers/activity_controller.dart';
+import 'package:gymshala/pages/calculator_page.dart';
 import 'package:gymshala/pages/calorie_calculator/activity.dart';
 import 'package:gymshala/pages/calorie_calculator/age_weight_widget.dart';
 import 'package:gymshala/pages/calorie_calculator/gender_widget.dart';
 import 'package:gymshala/pages/calorie_calculator/height_widget.dart';
 import 'package:gymshala/pages/calorie_calculator/new_page.dart';
 import 'package:gymshala/pages/home_page.dart';
+import 'package:gymshala/widgets/bottom_navbar.dart';
 
 import 'package:swipeable_button_view/swipeable_button_view.dart';
 
@@ -32,24 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
   var surplus;
   var deficit;
 
+  List<bool> _isSelected = [false, false];
+  List<String> _options = ['Option 1', 'Option 2'];
+
   
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-           
-        leading: IconButton(
-          onPressed: (() {
-            
-            Get.offAll(HomePage());
-          }),
-          icon: const Icon(Icons.arrow_back),
-        ),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: const Text("Calorie Calculator"),
-        ),
+        
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(12),
@@ -114,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                          
                           }
                           else {
-                            Get.offAll(HomeScreen());
+                            Get.offAll(CalculatorPage());
                           }
 
                   
@@ -135,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           });
                         },
-                        activeColor: Colors.blue,
+                        activeColor: Color(0xFFC1121F),
                         buttonWidget: const Icon(
                           Icons.arrow_forward_ios_rounded,
                           color: Colors.black,
@@ -146,7 +139,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-        ));
+        ),
+        bottomNavigationBar: AppBottomNavigationBar(selectedIndex: 1),
+        );
   }
 
   void calculateBmr() {

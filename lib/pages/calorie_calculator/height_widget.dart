@@ -45,7 +45,8 @@ class _HeightWidgetState extends State<HeightWidget> {
             min: 0,
             max: 245,
             value: _height.toDouble(),
-            thumbColor: Colors.red,
+            thumbColor: Colors.white,
+            activeColor: Color(0xFFC1121F),
             onChanged: (value) {
               setState(() {
                 _height = value.toInt();
