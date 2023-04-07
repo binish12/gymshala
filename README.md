@@ -1,6 +1,6 @@
-# gymshala
+# Gymshala
 
-A new Flutter project.
+A complete gym app for gym goers(Manage membership,Calorie Calculator,Food Calorie and Macros Tracker,Gym announcements,Workout Helper with all types of workout splits).This project is under development.Overall UI is yet to be changed and some features are yet to be added.Overall App will be developed by the 1st week of May.
 
 ## Getting Started
 
