@@ -1,29 +1,18 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/current_remaining_time.dart';
-import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gymshala/controllers/bannerko_controller.dart';
 import 'package:gymshala/controllers/banners_controller.dart';
 import 'package:gymshala/controllers/foods_controller.dart';
-
 import 'package:gymshala/controllers/notices_controller.dart';
 import 'package:gymshala/custom_appbar.dart';
-import 'package:gymshala/custom_buttons/notification_bell.dart';
-
-import 'package:gymshala/model/notice_model.dart';
-import 'package:gymshala/pages/calorie_calculator/home_screen.dart';
-import 'package:gymshala/pages/profile_page/profile.dart';
-
-import 'package:gymshala/pages/workout_pages/weight_goal.dart';
-import 'package:gymshala/pages/workout_pages/workout_page.dart';
 import 'package:gymshala/widgets/bottom_navbar.dart';
+import 'package:gymshala/widgets/countdown_days.dart';
 
-import '../api.dart';
+
 
 
 
@@ -35,21 +24,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+    int totalDays = 365;
+  int remainingDays = 35;
+  Timer? _timer;
   
   final foodcontroller = Get.put(FoodController());
   final noticecontroller = Get.put(NoticeController());
   final bannercontroller = Get.put(BannerController());
   final bancont = Get.put(BannerkoController());
  
-  final List<String> imageUrls = [  
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80', 
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',   
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80', 
+ 
+  final List<String> imageUrls = [ 
+    'https://img.freepik.com/free-photo/muscular-man-doing-push-ups-one-hand_7502-4775.jpg',
+    'https://img.freepik.com/premium-photo/shirtless-man-flipping-heavy-tire_136403-904.jpg',
+    'https://t4.ftcdn.net/jpg/02/07/90/87/360_F_207908753_IgTqqhNJMOnWOgSNLXayj6MYaj91gdjp.jpg'
+    
      ];
+
+@override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      setState(() {
+        if (remainingDays > 0) {
+          remainingDays--;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
 
 @override
 Widget build(BuildContext context) {
+  double percentage = (remainingDays / totalDays);
+    int progress = (percentage * 100).floor();
   return Scaffold(
     appBar: CustomAppBar(),
     body: SingleChildScrollView(
@@ -72,110 +86,149 @@ Widget build(BuildContext context) {
                   ),
                 ),
                 
-  //               Padding(
-  //                 padding: const EdgeInsets.only(top: 25),
-  //                 child: CarouselSlider( 
-  //                   items: bannercontroller.banners.map((banner) {
-  //   return ClipRRect(
+Padding(
+  padding: const EdgeInsets.only(top: 25),
+  child: CarouselSlider.builder(
+    itemCount: bannercontroller.banners.length,
+    itemBuilder: (context, index, realIndex) {
+  String imageUrl = imageUrls[index % imageUrls.length];
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(10),
+    child: CachedNetworkImage(
+      imageUrl: imageUrl,
+      fit: BoxFit.cover,
+      width: Get.width - 40,
+      placeholder: (context, url) => const CircularProgressIndicator(),
+    ),
+  );
+},
 
-  //     borderRadius: BorderRadius.circular(20),
-  //     child: Image.network(
-  //       bancont[]['image'],
-        
-  //       fit: BoxFit.cover,
-  //     ),
-  //   );
-  // }).toList(),
-                              
-                   
-  //                   options: CarouselOptions(
-                      
-                      
-                     
-  //                     enlargeCenterPage: true,
-  //                     autoPlay: true,
-  //                     aspectRatio: 16/7,
-  //                     autoPlayCurve: Curves.fastOutSlowIn,
-  //                     enableInfiniteScroll: true,
-  //                     autoPlayAnimationDuration:
-  //                         const Duration(milliseconds: 800),
-  //                     viewportFraction: 0.68,
-  //                   ),
-  //                 ),
-  //               ),
-              ],
+    options: CarouselOptions(
+      enlargeCenterPage: true,
+      autoPlay: true,
+      aspectRatio: 16 / 7,
+      autoPlayCurve: Curves.fastOutSlowIn,
+      enableInfiniteScroll: true,
+      autoPlayAnimationDuration: const Duration(milliseconds: 800),
+      viewportFraction: 0.68,
+    ),
+  ),
+),
+
+Padding(
+  padding: const EdgeInsets.only(top: 216,left: 3),
+  child:  Container(
+    height: Get.height/4.1,
+    width: Get.width/2.5,
+    child: Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Text("Days Left",style: TextStyle(fontSize: 18),),
+    
+          SizedBox(height: 7,),
+    
+          CircularIndicator(
+            percentage: percentage, 
+            remainingDays: remainingDays,
+             progress: progress
+          ),
+    
+           SizedBox(height: 6,),
+    
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFFC1121F),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10), // Change the value as per your need
+                    ),
+              
+    
             ),
+            onPressed: (){
+    
+            }, 
+            child: Text("Pay in Advance")
+          )
+    
+          
+    
+    
+        ],
+      ),
+    ),
+  ),
+),
+
+
+
+
+Padding(
+  padding: const EdgeInsets.only(top: 220,left: 175),
+  child:   Container(
+    decoration: BoxDecoration(
+      color: const Color(0xFFC1121F),
+      borderRadius: BorderRadius.circular(10)
+
+    ),
+    height: Get.height/4.3,
+    width: Get.width/1.8,
+  
+    
+  
+    child: 
+    SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             
-            const SizedBox(
-              height: 100,
-            ),
-            
+            children: const [
+              SizedBox(width: 7,),
+              Icon(Icons.campaign,color: Colors.white,size: 25,),
+               SizedBox(width: 20,),
+    
+              Text("Gym Admin",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400,color: Colors.white),),
+            ],
+          ),
+          const SizedBox(height: 10,),
+    
+    
+        Padding(
+  padding: const EdgeInsets.only(left: 10, right: 10),
+  child: Obx(() {
+    if (noticecontroller.notices.isNotEmpty) {
+      // Access the description of the last notice in the list
+      String lastNoticeDescription =
+          noticecontroller.notices.last.description ?? '';
+      return Text(lastNoticeDescription,
+          style: const TextStyle(color: Colors.white, fontSize: 16));
+    } else {
+      return const SizedBox.shrink();
+    }
+  }),
+)
+
+          
+          
+
          
-            
-      //  CircularCountDownTimer(
-      //     duration: 30,
-      //     initialDuration: 30,
-      //     controller: CountDownController(),
-      //     width: MediaQuery.of(context).size.width / 2,
-      //     height: MediaQuery.of(context).size.height / 2,
-      //     ringColor: Colors.grey[300]!,
-      //     ringGradient: null,
-      //     fillColor: Colors.blueAccent,
-      //     fillGradient: null,
-      //     backgroundColor: Colors.transparent,
-      //     backgroundGradient: null,
-      //     strokeWidth: 20.0,
-      //     strokeCap: StrokeCap.round,
-      //     textStyle: const TextStyle(
-      //         fontSize: 33.0, color: Colors.black, fontWeight: FontWeight.bold),
-      //     textFormat: CountdownTextFormat.SS,
-      //     isReverse: true,
-      //     isReverseAnimation: false,
-      //     isTimerTextShown: true,
-      //     autoStart: true,
-      //     onStart: () {
-      //       print('Countdown Started');
-      //     },
-      //     onComplete: () {
-      //       print('Countdown Ended');
-      //     },
-      //   ),
+          
+        ],
+      ),
+    )
 
+  ),
+),
 
            
-            
 
-
-
-
-
-
-
-            
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Get.to(const WeightGoal());
-            //   },
-            //   child: const Text("Workouts"),
-            // ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Get.to(const HomeScreen());
-            //   },
-            //   child: const Text("Calorie Calculator"),
-            // ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Get.to(const WorkoutPage());
-            //   },
-            //   child: const Text("Workout PDF"),
-            // ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     foodcontroller.getBottomSheet();
-            //   },
-            //   child: const Text("Food Calories"),
-            // ),
+ ],
+ ),
+             
           ],
         ),
       ),

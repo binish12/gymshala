@@ -1,53 +1,31 @@
-List<Banner> bannerFromJson(
+import '../api.dart';
+
+List<BannerPics> bannerFromJson(
         List<dynamic> bannerJson) =>
-    List<Banner>.from(bannerJson.map((bannerJson) =>
-        Banner.fromJson(bannerJson)));
-
-
-class Banner {
+    List<BannerPics>.from(bannerJson.map((bannerJson) =>
+        BannerPics.fromJson(bannerJson)));
+class BannerPics {
   bool? success;
-  List<Data>? data;
+  List<String>? data;
   String? message;
+  String? imagePath;
 
-  Banner({this.success, this.data, this.message});
+  BannerPics({this.success, this.data, this.message});
 
-  Banner.fromJson(Map<String, dynamic> json) {
+  BannerPics.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
+    data = json['data'].cast<String>();
     message = json['message'];
+    if (data != null && data!.isNotEmpty) {
+      imagePath = "${baseUrl}${data![0]}";
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['success'] = this.success;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
+    data['data'] = this.data;
     data['message'] = this.message;
-    return data;
-  }
-}
-
-class Data {
-  String? id;
-  String? image;
-
-  Data({this.id, this.image});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    image = json['image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['image'] = this.image;
     return data;
   }
 }

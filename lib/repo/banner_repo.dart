@@ -9,7 +9,7 @@ import '../model/banners_model.dart';
 
 class BannerRepo {
   static Future<void> getBanner(
-      {required Function(List<Banner>) onSuccess,
+      {required Function(List<BannerPics> totalData) onSuccess,
       required Function(String message) onError}) async {
         
     try {
@@ -20,9 +20,14 @@ class BannerRepo {
       );
 
       var data = json.decode(response.body);
+      print(data);
 
       if (data['success']) {
-        onSuccess(bannerFromJson(data['data']));
+        
+        print(data['data']);
+
+        List<BannerPics> bannerPics=bannerFromJson(data['data']);
+        onSuccess(bannerPics);
       }
 
     } catch (e) {
