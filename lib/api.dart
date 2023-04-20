@@ -1,5 +1,5 @@
 
-const baseUrl = "http://192.168.1.91/admin/admin/";
+const baseUrl = "http://192.168.0.125/admin/admin/";
 const getWorkoutAPI = '${baseUrl}getWorkout.php';
 const getNoticesAPI = '${baseUrl}getNotices.php';
 const getFoodsAPI = '${baseUrl}getFoods.php';

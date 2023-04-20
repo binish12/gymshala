@@ -50,7 +50,7 @@ dependencies:
   swipeable_button_view: ^0.0.2
 
    #svg
-  flutter_svg: ^0.23.0+1
+  flutter_svg: ^2.0.4
   # linaer percent inicator
   percent_indicator: ^4.0.0
   # screen util
@@ -62,6 +62,7 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_countdown_timer: ^4.1.0
   circular_countdown_timer: ^0.2.3
+  khalti_flutter: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +90,11 @@ flutter:
   assets:
     - assets/images/man.png
     - assets/images/woman.png
+    - assets/images/login.png
+    - assets/images/khalti.jpg
+    - assets/images/home.png
+    - assets/images/profile.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

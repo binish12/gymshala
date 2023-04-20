@@ -9,6 +9,7 @@ import 'package:gymshala/controllers/banners_controller.dart';
 import 'package:gymshala/controllers/foods_controller.dart';
 import 'package:gymshala/controllers/notices_controller.dart';
 import 'package:gymshala/custom_appbar.dart';
+import 'package:gymshala/pages/food_calories/diet_plan.dart';
 import 'package:gymshala/widgets/bottom_navbar.dart';
 import 'package:gymshala/widgets/countdown_days.dart';
 
@@ -160,6 +161,9 @@ Padding(
         ],
       ),
     ),
+    
+
+    
   ),
 ),
 
@@ -183,6 +187,7 @@ Padding(
     SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(height: 5,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             
@@ -194,7 +199,7 @@ Padding(
               Text("Gym Admin",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400,color: Colors.white),),
             ],
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(height: 20,),
     
     
         Padding(
@@ -210,7 +215,8 @@ Padding(
       return const SizedBox.shrink();
     }
   }),
-)
+),
+
 
           
           
@@ -224,10 +230,24 @@ Padding(
   ),
 ),
 
+
            
 
  ],
  ),
+ SizedBox(height: 32,),
+
+Container(
+                              height: 175,
+                              width: Get.width/1.32,
+                               decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                  image: AssetImage('assets/images/home.png'),
+                                  fit: BoxFit.cover
+                                ),
+                            ),
+                          
+                            ),
              
           ],
         ),

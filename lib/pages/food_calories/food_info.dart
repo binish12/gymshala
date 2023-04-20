@@ -17,12 +17,6 @@ class FOODInfo extends StatelessWidget {
   final String protein;
   final String selectedQuantity;
 
-// Text("Total Calories is: $totalCalories"),
-          // Text("Quantity is: $quantity"),
-          // Text("Carbohydrates is: $carbohydrates"),
-          // Text("Fats is: $fats"),
-          // Text("Protein is: $protein")
-
   @override
   Widget build(BuildContext context) {
     double calory = double.parse(totalCalories);
@@ -41,7 +35,7 @@ class FOODInfo extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children:  [
-             _circleProgress(),
+             Text("Chicken Breast",style: TextStyle(fontSize: 30),),
 
              const SizedBox(height: 45,),
             Row(
@@ -75,6 +69,7 @@ class FOODInfo extends StatelessWidget {
             
           ],
             ),
+            const SizedBox(height: 20),
             Text("Selected Quantity is: $selectedQuantity"),
           ],
         

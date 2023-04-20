@@ -153,8 +153,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     else {
       Get.snackbar("Error", "Please select your Gender",
+      
        
-      backgroundColor: Colors.red[400],colorText: Colors.white);
+      backgroundColor: Colors.grey[400],colorText: Colors.white);
+      
     }
     
   }

@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:gymshala/controllers/foods_controller.dart';
+import 'package:gymshala/pages/food_calories/total_display.dart';
 
+import '../../controllers/foods_controller.dart';
 import '../../model/foods_model.dart';
-import '../../widgets/bottom_navbar.dart';
 import 'food_info.dart';
 
-class FoodPage extends StatefulWidget {
-  const FoodPage({super.key});
+class DietPlan extends StatefulWidget {
+  const DietPlan({super.key});
 
   @override
-  State<FoodPage> createState() => _FoodPageState();
+  State<DietPlan> createState() => _DietPlanState();
 }
 
-class _FoodPageState extends State<FoodPage> {
-  TextEditingController searchController = TextEditingController();
+class _DietPlanState extends State<DietPlan> {
+    TextEditingController searchController = TextEditingController();
   final foodController = Get.put(FoodController());
-
-
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
+      appBar:AppBar(),
+
       body: SingleChildScrollView(
         child: Column(
               children: [
@@ -99,7 +99,7 @@ class _FoodPageState extends State<FoodPage> {
                                               onPressed: () {
                 
                                                 if(inputText != "" ){
-                                                  Get.to(() => FOODInfo(
+                                                  Get.to(() => TotalDisplay(
                                                   totalCalories: food.totalCalories ?? '',
                                                   quantity: food.quantity ?? '',
                                                   carbohydrates: food.carbohydrates ?? '',
@@ -119,7 +119,7 @@ class _FoodPageState extends State<FoodPage> {
 
 
                                 },
-                                child: const Text("OK"),
+                                child: const Text("Add"),
                               ),
 
 
@@ -152,7 +152,14 @@ class _FoodPageState extends State<FoodPage> {
               ],
             ),
       ),
-      bottomNavigationBar: AppBottomNavigationBar(selectedIndex: 1),
+
+
+
+
+
+
+
+
     );
   }
 }

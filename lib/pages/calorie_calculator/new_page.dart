@@ -104,6 +104,10 @@ class NewPage extends StatelessWidget {
                 child: ElevatedButton(
                   
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFC1121F),
+                     
+                                  
+                                
                     elevation: 4,
                   ),
                       onPressed: () {

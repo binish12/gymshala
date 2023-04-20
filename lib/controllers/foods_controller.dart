@@ -34,6 +34,8 @@ class FoodController extends GetxController {
     );
   }
 
+  
+
   void updateFilteredFoods(String query) {
     if (query.isEmpty) {
       filteredFoods.assignAll(foods);
