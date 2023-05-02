@@ -76,7 +76,7 @@ class MyProfile extends StatelessWidget {
                 )
 
               ],
-            )
+            ),
 
 
 
@@ -87,44 +87,44 @@ class MyProfile extends StatelessWidget {
 
 
 
-            // Center(
-            //   child: ElevatedButton(
-            //     onPressed: (() {
-            //      Get.to(MembershipPage());
-            //       // Get.snackbar("Failed", "Invalid Email Address",backgroundColor: Colors.grey,duration: Duration(hours: 1));
+            Center(
+              child: ElevatedButton(
+                onPressed: (() {
+                 Get.to(MembershipPage());
+                  // Get.snackbar("Failed", "Invalid Email Address",backgroundColor: Colors.grey,duration: Duration(hours: 1));
                   
-            //     }
-            //     ),
+                }
+                ),
                 
                 
-            //     child: Text("Button")
-            //     ),
+                child: Text("Button")
+                ),
     
     
                 
     
                 
-            // ),
-            // ElevatedButton(
-            //   onPressed: (){
-            //     Get.to(LoginPage());
+            ),
+            ElevatedButton(
+              onPressed: (){
+                Get.to(LoginPage());
                 
-            //   }, 
-            //   child: Text("Login")),
+              }, 
+              child: Text("Login")),
     
-            //   ElevatedButton(
-            //   onPressed: (){
-            //     Get.to(LoginPage());
-            //     Get.snackbar("Success", "Logout Successful",backgroundColor: Colors.grey);
-            //   }, 
-            //   child: Text("Logout")),
+              ElevatedButton(
+              onPressed: (){
+                Get.to(LoginPage());
+                Get.snackbar("Success", "Logout Successful",backgroundColor: Colors.grey);
+              }, 
+              child: Text("Logout")),
     
-            //   ElevatedButton(
-            //   onPressed: (){
-            //     Get.to(ChangePassword());
+              ElevatedButton(
+              onPressed: (){
+                Get.to(ChangePassword());
                 
-            //   }, 
-            //   child: Text("Change password"))
+              }, 
+              child: Text("Change password"))
           ],
         ),
     

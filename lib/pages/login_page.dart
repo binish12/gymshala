@@ -79,17 +79,20 @@ class LoginPage extends StatelessWidget {
                             SizedBox(
                               width: Get.width/1.1,
                               height: 50,
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll(Color(0xFFC1121F))
-                            
-                                ),
-                                onPressed: (){
-                                  Get.to(HomePage());
-                                  Get.snackbar("Success", "Login Successful",backgroundColor: Colors.green);
-                            
-                                }, 
-                                child: Text("Login",style: TextStyle(fontSize: 20),)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(Color(0xFFC1121F))
+                                                          
+                                  ),
+                                  onPressed: (){
+                                    Get.to(HomePage());
+                                    Get.snackbar("Success", "Login Successful",backgroundColor: Colors.green);
+                                                          
+                                  }, 
+                                  child: Text("Login",style: TextStyle(fontSize: 20),)),
+                              ),
                             )
             
                             

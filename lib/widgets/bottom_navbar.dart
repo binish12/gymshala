@@ -31,7 +31,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
         Get.offAll(const WorkoutPage());
         break;
       case 3:
-        Get.offAll(const MyProfile());
+        Get.offAll( MyProfile());
         break;
     }
   }

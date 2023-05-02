@@ -181,18 +181,21 @@ class MembershipPage extends StatelessWidget {
                            SizedBox(
                               width: Get.width/1.1,
                               height: 44,
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  
-                                  backgroundColor: MaterialStatePropertyAll(Color(0xFFC1121F))
-                            
-                                ),
-                                onPressed: (){
-                                  Get.to(LoginPage());
-                                  // Get.snackbar("Success", "Registration Successful",backgroundColor: Colors.green,duration: Duration(hours: 1));
-                            
-                                }, 
-                                child: Text("Register",style: TextStyle(fontSize: 20),)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(13),
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    
+                                    backgroundColor: MaterialStatePropertyAll(Color(0xFFC1121F))
+                                                          
+                                  ),
+                                  onPressed: (){
+                                    Get.to(LoginPage());
+                                    // Get.snackbar("Success", "Registration Successful",backgroundColor: Colors.green,duration: Duration(hours: 1));
+                                                          
+                                  }, 
+                                  child: Text("Register",style: TextStyle(fontSize: 20),)),
+                              ),
                             )
             
               
