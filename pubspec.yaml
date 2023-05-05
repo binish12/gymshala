@@ -63,6 +63,7 @@ dependencies:
   flutter_countdown_timer: ^4.1.0
   circular_countdown_timer: ^0.2.3
   khalti_flutter: ^2.2.1
+  shared_preferences: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -91,7 +92,7 @@ flutter:
     - assets/images/man.png
     - assets/images/woman.png
     - assets/images/login.png
-    - assets/images/khalti.jpg
+    - assets/images/khalti.png
     - assets/images/home.png
     - assets/images/profile.png
 

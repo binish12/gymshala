@@ -1,5 +1,8 @@
 
-const baseUrl = "http://192.168.1.80/admin/admin/";
+const baseUrl = "http://192.168.1.82/admin/admin/";
+const url = "http://192.168.1.82/test/";
+const signupAPI = '${url}signup.php';
+const loginAPI = '${url}login.php';
 const getWorkoutAPI = '${baseUrl}getWorkout.php';
 const getNoticesAPI = '${baseUrl}getNotices.php';
 const getFoodsAPI = '${baseUrl}getFoods.php';

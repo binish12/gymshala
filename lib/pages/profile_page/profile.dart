@@ -4,9 +4,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:gymshala/membership/membership.dart';
 import 'package:gymshala/pages/change_password.dart';
+import 'package:gymshala/pages/guests/guest_page.dart';
 import 'package:gymshala/pages/login_page.dart';
 
 import '../../widgets/bottom_navbar.dart';
+import '../packages_page.dart';
 
 class MyProfile extends StatelessWidget {
   const MyProfile({super.key});
@@ -121,10 +123,16 @@ class MyProfile extends StatelessWidget {
     
               ElevatedButton(
               onPressed: (){
-                Get.to(ChangePassword());
+                Get.to(() => GuestPage());
                 
               }, 
-              child: Text("Change password"))
+              child: Text("Change password")),
+
+              ElevatedButton(
+                onPressed:() {
+                  
+                },
+                 child: Text("Dark Mode"))
           ],
         ),
     

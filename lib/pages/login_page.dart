@@ -4,8 +4,13 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:gymshala/pages/home_page.dart';
 
+import '../controllers/authentication_controlller.dart';
+
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+   final loginController = Get.put(AuthenticationController());
+   LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +47,7 @@ class LoginPage extends StatelessWidget {
                          children: [
                 
                            TextField(
+                                    controller: usernameController,
                                     decoration: InputDecoration(  
                                       prefixIcon: const Icon(Icons.mail),
                                       hintText: 'Email',
@@ -56,6 +62,7 @@ class LoginPage extends StatelessWidget {
                 
                 
                            TextField(
+                                    controller: passwordController,
                                     obscureText: true,
                                     decoration: InputDecoration(
                                       prefixIcon: const Icon(Icons.lock),
@@ -87,8 +94,10 @@ class LoginPage extends StatelessWidget {
                                                           
                                   ),
                                   onPressed: (){
-                                    Get.to(HomePage());
-                                    Get.snackbar("Success", "Login Successful",backgroundColor: Colors.green);
+                                    loginController.login(
+                                    username: usernameController.text,
+                                    password: passwordController.text);
+                                    
                                                           
                                   }, 
                                   child: Text("Login",style: TextStyle(fontSize: 20),)),

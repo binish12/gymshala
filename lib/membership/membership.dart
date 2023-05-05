@@ -1,15 +1,23 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gymshala/pages/home_page.dart';
+import 'package:gymshala/model/packages_model.dart';
 import 'package:gymshala/pages/login_page.dart';
+import 'package:gymshala/pages/packages_page.dart';
 import 'package:http/http.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 
+import '../controllers/authentication_controlller.dart';
+
 
 class MembershipPage extends StatelessWidget {
-  const MembershipPage({super.key});
+    TextEditingController nameController = TextEditingController();
+    TextEditingController addressController = TextEditingController();
+    TextEditingController phoneController = TextEditingController();
+    TextEditingController usernameController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmController = TextEditingController();
+  final registerController = Get.put(AuthenticationController());
+   MembershipPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +38,7 @@ class MembershipPage extends StatelessWidget {
               children: [
                 Text("Membership Form",
                   style:TextStyle(fontSize: 30,fontWeight: FontWeight.w400,color: Colors.white) ,),
-                SizedBox(height: 35,),
+                SizedBox(height: 60,),
                  Center(
                    child: SizedBox(
                     width: Get.width/1.1,
@@ -38,6 +46,7 @@ class MembershipPage extends StatelessWidget {
                        children: [
               
                          TextField(
+                                  controller: nameController,
                                   decoration: InputDecoration(  
                                     contentPadding: EdgeInsets.symmetric(vertical:16),
                                     prefixIcon: const Icon(Icons.person),
@@ -52,6 +61,7 @@ class MembershipPage extends StatelessWidget {
                                 SizedBox(height: 15,),
                           
                           TextField(
+                                  controller: addressController,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(vertical:16),
                                     prefixIcon: const Icon(Icons.home),
@@ -66,6 +76,7 @@ class MembershipPage extends StatelessWidget {
                                 SizedBox(height: 15,),
                   
                           TextField(
+                                  controller: phoneController,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(vertical:16),
@@ -81,6 +92,7 @@ class MembershipPage extends StatelessWidget {
                                 SizedBox(height: 15,),
                   
                           TextField(
+                                  controller: usernameController,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(vertical:16),
                                     prefixIcon: const Icon(Icons.mail),
@@ -95,6 +107,7 @@ class MembershipPage extends StatelessWidget {
                                 SizedBox(height: 15,),
                   
                           TextField(
+                                  controller:passwordController,
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(vertical:16),
@@ -111,6 +124,7 @@ class MembershipPage extends StatelessWidget {
                                 SizedBox(height: 15,),
                           
                           TextField(
+                                  controller: confirmController,
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(vertical:16),
@@ -123,61 +137,20 @@ class MembershipPage extends StatelessWidget {
                                   ),
                           
                           ),
-                          SizedBox(height: 12,),
+                          SizedBox(height: 5,),
+                          TextButton(
+                            onPressed: (){
+                             
+                                Get.to(() => LoginPage());
 
-                          InkWell(
-                            onTap: () {
-
-                              KhaltiScope.of(context).pay(
-                  config: PaymentConfig(
-            amount:  100000,
-            productIdentity: "productIdentity",
-            productName: "productName",
-                  ),
-                  preferences: [
-            PaymentPreference.khalti,
-                  ],
-                  onSuccess: (success) {
-            Get.snackbar("Success", "Payment Successful",backgroundColor: Colors.green);
-            Get.off(HomePage());
-              
-            // paymentController.token.value = success.token;
-            // paymentController.amount.value = success.amount;
-              
-            log("tnx id -----------${success.token.toString()}");
-            // payment = paymentController.token.toString();
-            // paymentController.postPayment();
-            // postOrder();
-            // CustomSnackBar.success(title: "Payment", message: "Payment Successful");
-                  },
-                  onFailure: (fa) {
-            Get.snackbar("Success", "Payment Failed",backgroundColor: Colors.red);
-            // CustomSnackBar.error(title: "Payment", message: "Payment Failure");
-                  },
-                  onCancel: () {
-            Get.snackbar("Cancelled", "Payment Cancelled",backgroundColor: Colors.red);
-            // CustomSnackBar.info(title: "Payment", message: "Payment Cancel");
-                  },
-                );
-                              
-                            },
-                            child: Container(
-                              height: 70,
-                              width: 110,
-                               decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                  image: AssetImage('assets/images/khalti.jpg'),
-                                  fit: BoxFit.cover
-                                ),
+                            }, 
+                            child: Text("Already have an account ?",style: TextStyle(fontSize: 15),),
                             ),
+                           
+
                           
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                               
-              
-                         
-              
+                          SizedBox(height: 30,),
+   
                            SizedBox(
                               width: Get.width/1.1,
                               height: 44,
@@ -190,11 +163,27 @@ class MembershipPage extends StatelessWidget {
                                                           
                                   ),
                                   onPressed: (){
-                                    Get.to(LoginPage());
-                                    // Get.snackbar("Success", "Registration Successful",backgroundColor: Colors.green,duration: Duration(hours: 1));
+                          
+                                     if (passwordController.text != confirmController.text) {
+                                    // Passwords don't match, show error message
+                                      Get.snackbar("Error", "Password does not match",backgroundColor: Colors.red,colorText: Colors.white,
+                                          snackPosition: SnackPosition.BOTTOM);
+                                      return;
+                                     }
+                                     Get.to(()=> MyPackages(nameController: nameController,addressController: addressController,
+                                     phoneController: phoneController,usernameController: usernameController,passwordController: passwordController,));
+
+                                  // registerController.register(
+                                  //     fullName: nameController.text,
+                                  //     username: usernameController.text,
+                                  //     address: addressController.text,
+                                  //     phoneNumber: phoneController.text,
+                                  //     password: passwordController.text);
+
+
                                                           
                                   }, 
-                                  child: Text("Register",style: TextStyle(fontSize: 20),)),
+                                  child: Text("Continue",style: TextStyle(fontSize: 20),)),
                               ),
                             )
             
